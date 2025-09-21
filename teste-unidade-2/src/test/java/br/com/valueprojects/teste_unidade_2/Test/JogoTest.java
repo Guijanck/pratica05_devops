@@ -12,42 +12,60 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class JogoTest {
 
-    @Test
-    public void testAnotaResultados() {
-        // Cria o jogo com a descrição
-        Jogo jogo = new Jogo("Partida de Teste");
+	@Test
+	public void deveTerDescricaoAoSerCriado(){
+		Jogo jogo = new Jogo("Partida de Teste");
+		assertEquals("Partida de Teste", jogo.getDescricao());
+	}
 
-        // Cria participantes
-        Participante p1 = new Participante("Membro Um");
-        Participante p2 = new Participante("Membro Dois");
+	@Test
+	public void testAnotaResultados() {
+		// Cria o jogo com a descrição
+		Jogo jogo = new Jogo("Partida de Teste");
 
-        // Cria resultados com participante e métrica
-        Resultado r1 = new Resultado(p1, 10.0);
-        Resultado r2 = new Resultado(p2, 20.0);
+		// Cria participantes
+		Participante p1 = new Participante("Membro Um");
+		Participante p2 = new Participante("Membro Dois");
 
-        // Anota resultados no jogo
-        jogo.anota(r1);
-        jogo.anota(r2);
+		// Cria resultados com participante e métrica
+		Resultado r1 = new Resultado(p1, 10.0);
+		Resultado r2 = new Resultado(p2, 20.0);
 
-        // Verifica que os resultados foram adicionados
-        List<Resultado> resultados = jogo.getResultados();
-        assertEquals(2, resultados.size());
-        assertEquals(10.0, resultados.get(0).getMetrica());
-        assertEquals(20.0, resultados.get(1).getMetrica());
-    }
+		// Anota resultados no jogo
+		jogo.anota(r1);
+		jogo.anota(r2);
 
-    @Test
-    public void testCalculaMedia() {
-        Jogo jogo = new Jogo("Partida de Teste");
+		// Verifica que os resultados foram adicionados
+		List<Resultado> resultados = jogo.getResultados();
+		assertEquals(2, resultados.size());
+		assertEquals(10.0, resultados.get(0).getMetrica());
+		assertEquals(20.0, resultados.get(1).getMetrica());
+	}
 
-        Participante p1 = new Participante("Membro Um");
-        Participante p2 = new Participante("Membro Dois");
+	@Test
+	public void testCalculaMedia() {
+		Jogo jogo = new Jogo("Partida de Teste");
 
-        jogo.anota(new Resultado(p1, 10.0));
-        jogo.anota(new Resultado(p2, 20.0));
+		Participante p1 = new Participante("Membro Um");
+		Participante p2 = new Participante("Membro Dois");
 
-        // Calcula média
-        double media = jogo.calculaMedia();
-        assertEquals(15.0, media);
-    }
+		jogo.anota(new Resultado(p1, 10.0));
+		jogo.anota(new Resultado(p2, 20.0));
+
+		// Calcula média
+		double media = jogo.calculaMedia();
+		assertEquals(15.0, media);
+	}
+
+	@Test
+	public void naoDeveAnotarDoisResultadosSeguidosDoMesmoParticipante() {
+		Jogo jogo = new Jogo("Corrida Maluca");
+		Participante p1 = new Participante("Dick Vigarista");
+
+		jogo.anota(new Resultado(p1, 100.0));
+		jogo.anota(new Resultado(p1, 110.0));
+
+		assertEquals(1, jogo.getResultados().size());
+	}
+
 }

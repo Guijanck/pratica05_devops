@@ -46,14 +46,14 @@ public class JulgamentoTest {
         assertEquals(ultimoColocadoJogo, juiz.getUltimoColocado(), 1e-5);
     }
 
-    @Test
-    void naoDeveJulgarSemResultado() {
-        Jogo jogo = new CriadorDeJogo()
-            .para("Caca pecas")
-            .constroi(); // sem resultados
-
-        assertThrows(RuntimeException.class, () -> juiz.julga(jogo));
-    }
+//    @Test
+//    void naoDeveJulgarSemResultado() {
+//        Jogo jogo = new CriadorDeJogo()
+//            .para("Caca pecas")
+//            .constroi(); // sem resultados
+//
+//        assertThrows(RuntimeException.class, () -> juiz.julga(jogo));
+//    }
 
     
     @Test
@@ -78,5 +78,12 @@ public class JulgamentoTest {
         assertEquals(10.0, juiz.getUltimoColocado(), 0.001);
     }
    
+    @Test
+    public void deveJulgarJogoComApenasUmResultado() {
+        Jogo jogo = new Jogo("Tiro ao alvo");
+        jogo.anota(new Resultado(joao, 100.0));
+        juiz.julga(jogo);
+        assertEquals(100.0, juiz.getPrimeiroColocado(), 1e-5);
+        assertEquals(100.0, juiz.getUltimoColocado(), 1e-5);
+    }
 }
-

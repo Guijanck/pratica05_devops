@@ -34,7 +34,6 @@ public class Jogo {
 		return Collections.unmodifiableList(resultados);
 	}
 
-			
 	public double calculaMedia() {
 		double pontuacaoMembroUm = 0.0;
 		double pontuacaoMembroDois = 0.0;
@@ -53,6 +52,9 @@ public class Jogo {
 	    }
 		return (pontuacaoMembroUm + pontuacaoMembroDois) / 2;
 	}
+
+			
+	
 	
 
 	//Green - TDD - Ainda falhando - Isso gera 500/2 + 500/2 = 250 + 250 = 250 
