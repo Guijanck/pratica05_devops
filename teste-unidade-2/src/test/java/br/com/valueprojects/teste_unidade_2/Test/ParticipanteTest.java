@@ -75,7 +75,7 @@ public class ParticipanteTest {
 	    }
 
 	    @Test
-	    void deveRespeitarSimetria() {
+	    void deveRespeitarSimetriaJoao() {
 	        // Arrange
 	        Participante p1 = new Participante(1, "João");
 	        Participante p2 = new Participante(1, "João");
