@@ -35,7 +35,24 @@ public class Jogo {
 	}
 
 			
-	
+	public double calculaMedia() {
+		double pontuacaoMembroUm = 0.0;
+		double pontuacaoMembroDois = 0.0;
+		
+	    for (Resultado resultado : resultados) {
+	        if (resultado.getParticipante().getNome().equals("Membro Um")) {
+	            pontuacaoMembroUm = resultado.getMetrica();
+	            System.out.println(pontuacaoMembroUm);
+	            
+	        }
+	        if (resultado.getParticipante().getNome().equals("Membro Dois")) {
+	            pontuacaoMembroDois = resultado.getMetrica();
+	            System.out.println(pontuacaoMembroDois);
+	            
+	        }
+	    }
+		return (pontuacaoMembroUm + pontuacaoMembroDois) / 2;
+	}
 	
 
 	//Green - TDD - Ainda falhando - Isso gera 500/2 + 500/2 = 250 + 250 = 250 

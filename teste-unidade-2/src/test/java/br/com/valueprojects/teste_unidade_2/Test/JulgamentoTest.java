@@ -51,6 +51,14 @@ public class JulgamentoTest {
         Jogo jogo = new CriadorDeJogo()
             .para("Caca pecas")
             .constroi(); // sem resultados
+        
+        // A linha abaixo testa se o método 'julga' lança a exceção esperada.
+        // A ferramenta JaCoCo pode marcar esta linha como 'amarela' (parcialmente coberta)
+        // porque a execução é interrompida pelo lançamento da exceção.
+        // Este comportamento é esperado e o teste valida a funcionalidade corretamente.
+        
+        assertThrows(RuntimeException.class, () -> juiz.julga(jogo));
+        
 
         assertThrows(RuntimeException.class, () -> juiz.julga(jogo));
     }
@@ -77,6 +85,44 @@ public class JulgamentoTest {
         assertEquals(20.0, juiz.getPrimeiroColocado(), 0.001);
         assertEquals(10.0, juiz.getUltimoColocado(), 0.001);
     }
+    
+    
+    @Test
+    void deveJulgarComApenasUmParticipante() {
+        Jogo jogo = new Jogo("Corrida Solo");
+        jogo.anota(new Resultado(joao, 77.0));
+
+        juiz.julga(jogo);
+
+        assertEquals(77.0, juiz.getPrimeiroColocado());
+        assertEquals(77.0, juiz.getUltimoColocado());
+    }
+    
+    @Test
+    void deveJulgarComApenasDoisParticipantes() {
+        Jogo jogo = new Jogo("Derruba barreiras");
+
+        jogo.anota(new Resultado(joao, 90.0));
+        jogo.anota(new Resultado(pedro, 91.0));
+
+        juiz.julga(jogo);
+        
+        assertEquals(91.0, juiz.getPrimeiroColocado(), 0.001);
+        assertEquals(90.0, juiz.getUltimoColocado(), 0.001);
+    }
+
+    
+    @Test
+    void deveJulgarQuandoResultadosSaoIguais() {
+        Jogo jogo = new Jogo("Empate");
+
+        jogo.anota(new Resultado(joao, 50.0));
+        jogo.anota(new Resultado(pedro, 50.0));
+
+        juiz.julga(jogo);
+
+        assertEquals(50.0, juiz.getPrimeiroColocado(), 0.001);
+        assertEquals(50.0, juiz.getUltimoColocado(), 0.001);
+    }
    
 }
-

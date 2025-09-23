@@ -50,4 +50,27 @@ public class JogoTest {
         double media = jogo.calculaMedia();
         assertEquals(15.0, media);
     }
+    
+    @Test
+    public void testCalculaMediaSemResultados() {
+        Jogo jogo = new Jogo("Partida vazia");
+        assertEquals(0.0, jogo.calculaMedia()); 
+        // ou assertThrows, se o código lançar exceção
+    }
+    
+    @Test
+    public void testNaoAdicionaMesmoParticipanteDuasVezesSeguidas() {
+        Jogo jogo = new Jogo("Partida duplicada");
+
+        Participante p1 = new Participante("Membro Um");
+
+        // Primeiro resultado - deve ser adicionado
+        jogo.anota(new Resultado(p1, 10.0));
+        // Segundo resultado com o mesmo participante - não deve ser adicionado
+        jogo.anota(new Resultado(p1, 20.0));
+
+        // Só o primeiro resultado deve estar na lista
+        assertEquals(1, jogo.getResultados().size());
+        assertEquals(10.0, jogo.getResultados().get(0).getMetrica());
+    }
 }
