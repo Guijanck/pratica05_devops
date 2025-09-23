@@ -11,13 +11,15 @@ public class CriadorDeJogoTest {
 	
 	@Test
 	public void testCriadorDeJogoComResultado() {
+		// Arrange
 	    Participante p1 = new Participante("Jogador Teste");
-
+	    
+	    // Action
 	    Jogo jogo = new CriadorDeJogo()
 	            .para("Jogo Builder")
 	            .resultado(p1, 50.0)   // <- chama o método que está vermelho
 	            .constroi();
-
+	    // Assert
 	    assertEquals("Jogo Builder", jogo.getDescricao());
 	    assertEquals(1, jogo.getResultados().size());
 	    assertEquals(50.0, jogo.getResultados().get(0).getMetrica());
