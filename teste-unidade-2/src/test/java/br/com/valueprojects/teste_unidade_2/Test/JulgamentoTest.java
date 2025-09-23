@@ -66,7 +66,7 @@ public class JulgamentoTest {
     
     @Test
     public void deveEncontrarOMaiorEMenorPontuacao() {
-        // 1. Cenário
+        // Arrange
         Jogo jogo = new Jogo("Jogo de Pontos");
         
         // Crie participantes e resultados
@@ -77,11 +77,11 @@ public class JulgamentoTest {
         jogo.anota(new Resultado(participante1, 10.0));
         jogo.anota(new Resultado(participante2, 20.0)); 
         
-        // 2. Ação
+        // Action
         // Chame o método julga com o objeto Jogo
         juiz.julga(jogo);
 
-        // 3. Verificação
+        // Assert
         assertEquals(20.0, juiz.getPrimeiroColocado(), 0.001);
         assertEquals(10.0, juiz.getUltimoColocado(), 0.001);
     }
