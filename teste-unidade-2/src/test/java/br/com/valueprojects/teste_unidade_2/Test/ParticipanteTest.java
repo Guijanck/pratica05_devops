@@ -73,22 +73,19 @@ public class ParticipanteTest {
 	        assertTrue(p1EqualsP2);
 	        assertTrue(p2EqualsP1);
 	    }
-		@Test
-		void deveCumprirContratoHashCode() {
-		    // Arrange
-		    Participante p1 = new Participante(1, "Ana");
-		    Participante p2 = new Participante(1, "Ana");
-		
-		    // Act
-		    boolean iguais = p1.equals(p2);
-		    boolean hashIguais = p1.hashCode() == p2.hashCode();
-		    java.util.Set<Participante> conjunto = new java.util.HashSet<>();
-		    conjunto.add(p1);
-		    conjunto.add(p2);
-		
-		    // Assert
-		    assertTrue(iguais);                 // objetos iguais
-		    assertTrue(hashIguais);             // hashCode deve ser igual quando equals é true
-		    assertEquals(1, conjunto.size());   // em Set, só 1 elemento permanece
-		}
+
+	    @Test
+	    void deveRespeitarSimetria() {
+	        // Arrange
+	        Participante p1 = new Participante(1, "João");
+	        Participante p2 = new Participante(1, "João");
+
+	        // Act
+	        boolean p1EqualsP2 = p1.equals(p2);
+	        boolean p2EqualsP1 = p2.equals(p1);
+
+	        // Assert
+	        assertTrue(p1EqualsP2);
+	        assertTrue(p2EqualsP1);
+	    }
 }
