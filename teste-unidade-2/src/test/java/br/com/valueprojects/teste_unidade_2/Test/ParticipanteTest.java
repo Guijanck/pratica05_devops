@@ -58,5 +58,20 @@ public class ParticipanteTest {
 	        Participante p2 = new Participante(1, null);
 	        assertEquals(p1, p2);
 	    }
+	    
+	    @Test
+	    void deveRespeitarSimetria() {
+	        // Arrange
+	        Participante p1 = new Participante(1, "Ana");
+	        Participante p2 = new Participante(1, "Ana");
+
+	        // Act
+	        boolean p1EqualsP2 = p1.equals(p2);
+	        boolean p2EqualsP1 = p2.equals(p1);
+
+	        // Assert
+	        assertTrue(p1EqualsP2);
+	        assertTrue(p2EqualsP1);
+	    }
 
 }
